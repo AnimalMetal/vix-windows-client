@@ -1,6 +1,12 @@
-# ViX Client 1.3.0
+# ViX Client 1.4.0
 
 Accessible Windows client with a native catalogue, global search and native playback controls. The main window contains only Catalogue and Player. Its required web engine stays hidden, except when the user explicitly opens the necessary Mi cuenta workflow.
+
+## Updates in 1.4.0
+
+Startup checks are enabled by default, with a Yes/No prompt before any download. Turn them off in Options, or check manually through Help. Downloads are signed with Ed25519, verified by size and SHA-256, and installed in place with settings/session preservation and failed-start rollback. Source checkouts do not install binaries. Existing users need one manual installation of 1.4.0 to get the updater.
+
+Updates come from stable GitHub Releases, not ordinary source pushes. See [RELEASING.md](RELEASING.md) for the one-command local build/sign/publish procedure. The private signing key stays on the publisher's computer and must be backed up separately.
 
 ## New in 1.3.0
 
@@ -27,7 +33,7 @@ The engine is still required internally for catalogue rendering, authentication 
 ## Run and validate
 
 Python 3.13 plus requirements.txt: `python main.py`.
-Build: `python setup_cx.py build`; output: `build/VixClient-1.3.0/VixClient.exe`. Keep the whole output folder. Microsoft Edge WebView2 Runtime is required.
+Build: `python setup_cx.py build`; output: `build/VixClient-1.4.0/VixClient.exe`. Keep the whole output folder. Microsoft Edge WebView2 Runtime is required.
 
 Tests: `python -m pytest`. Public live-season checks: `python tools/check_season_navigation.py` (La Rosa de Guadalupe, Mujeres Asesinas, Vecinos and Mi Corazón Es Tuyo episode ranges). A specific search result can be checked with `python tools/check_season_navigation.py search:Vecinos`. Playback/return check: `python tools/check_native_updates.py`. Startup: `python main.py --comprobar-arranque`; a live search check is available through --comprobar-webview with isolated APP_DATA_DIR.
 

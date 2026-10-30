@@ -44,9 +44,21 @@ Las campanitas de inicio, apertura, regreso, resultados y límites de lista son 
 
 Izquierda/derecha y Ctrl+1 a Ctrl+6 consultan columnas. Ctrl+D guarda o quita un favorito local. Ctrl+H explica el control enfocado; F1 abre este manual. Se mantienen las opciones de lectura de columnas y bandeja.
 
-## Actualización y datos
+## Actualizaciones automáticas
 
-Cierre la versión anterior antes de abrir 1.2.2. Si sus carpetas están juntas, la primera apertura normal importa configuración y sesión cerrada desde la versión anterior más reciente con datos de uso. No modifica esa versión ni copia un perfil abierto. Windows o ViX pueden solicitar autenticación de nuevo.
+Al abrir el cliente, se comprueba si hay una versión nueva. «Sí, descargar e instalar» descarga la actualización y muestra su progreso. Al terminar la verificación, el cliente se cierra y vuelve a abrirse. «No, seguir usando el cliente» o Escape cierra el aviso sin descargar ni interrumpir el uso.
+
+Ctrl+coma abre Opciones. «Buscar actualizaciones al iniciar» está activada de forma predeterminada. Desmárquela y pulse Aceptar para evitar comprobaciones al abrir; Cancelar conserva el ajuste anterior. Puede consultar cuando quiera desde Ayuda, Buscar actualizaciones, incluso con la comprobación al inicio desactivada. Sin conexión, el cliente sigue funcionando.
+
+En el aviso, Tab recorre las novedades, el estado y los botones. Las novedades y el estado pueden leerse con las flechas. Ctrl+H explica el control enfocado. Durante la descarga, Cancelar impide instalar y permite reanudar la descarga en un intento posterior. Los errores ofrecen Reintentar. La comprobación al iniciar no descarga ni instala por sí sola.
+
+Se comprueban firma, tamaño e integridad antes de instalar. Cuenta, sesión, favoritos y configuración se conservan. Si la versión nueva no arranca, se restaura el programa anterior; el aviso explica qué ocurrió. Los detalles quedan en data/logs/actualizacion.log. Cierre otras copias que utilicen la misma carpeta antes de actualizar.
+
+Las versiones anteriores a 1.4.0 necesitan esta primera instalación manual para disponer del actualizador. A partir de ella, las versiones publicadas se ofrecen dentro del cliente. Una publicación de código en GitHub no equivale a una versión lista para instalar.
+
+## Datos y primera instalación
+
+Cierre la versión anterior antes de abrir 1.4.0. Si sus carpetas están juntas, la primera apertura normal importa configuración y sesión cerrada desde la versión anterior más reciente con datos de uso. No modifica esa versión ni copia un perfil abierto. Windows o ViX pueden solicitar autenticación de nuevo. Las actualizaciones automáticas posteriores se aplican en la carpeta existente.
 
 Configuración y favoritos están en data/config, sesión en data/sessions, sonidos ajustados en data/cache y registros en data/logs. No comparta esas carpetas personales. El motor Microsoft Edge WebView2 Runtime sigue siendo necesario para el funcionamiento interno.
 

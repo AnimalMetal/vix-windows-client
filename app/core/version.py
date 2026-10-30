@@ -9,4 +9,4 @@ Para publicar una versión nueva solo se cambia ``APP_VERSION`` aquí.
 NOMBRE_APLICACION = "ViX Client"
 # Identificador sin espacios: ejecutable, instancia única, carpeta de compilación.
 ID_APLICACION = "VixClient"
-APP_VERSION = "1.3.0"
+APP_VERSION = "1.4.0"

@@ -34,6 +34,7 @@ NOMBRE_ARCHIVO = "config.json"
 
 # Todas las claves que la aplicación conoce, con su valor inicial.
 VALORES_POR_DEFECTO: dict[str, Any] = {
+	"updates": {"check_on_startup": True},
 	"sounds": {"enabled": True, "volume": 25},
 	"vix": {"favorites": [], "row_number": True, "column_name": True, "column_content": True},
 	"general": {

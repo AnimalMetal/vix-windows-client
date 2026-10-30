@@ -1,5 +1,11 @@
 ﻿# Novedades
 
+## 1.4.0
+
+El cliente busca actualizaciones al iniciar y pregunta «Sí, descargar e instalar» o «No, seguir usando el cliente». No descarga sin su consentimiento. Puede desactivar «Buscar actualizaciones al iniciar» en Opciones y consultar siempre desde Ayuda, Buscar actualizaciones.
+
+La descarga muestra progreso y permite cancelar o reintentar. La actualización conserva cuenta, sesión, favoritos y ajustes. Si la versión nueva no consigue arrancar, se recupera el programa anterior y se informa al abrirlo.
+
 ## 1.3.0
 
 En vivo incorpora una guía nativa con número, canal, programa actual, horario local, siguiente programa, categorías y favorito. Puede elegir un grupo y filtrar por canal, número o programa. F4 abre la programación disponible. Se indica cuando ViX no ofrece información.

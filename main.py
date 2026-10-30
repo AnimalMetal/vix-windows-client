@@ -134,7 +134,9 @@ def _instalar_aviso_de_errores(ventana) -> None:
 def _principal(argumentos: list[str]) -> int:
 	inicio = time.perf_counter()
 	comprobar_web = "--comprobar-webview" in argumentos
+	comprobar_actualizacion = "--comprobar-actualizacion" in argumentos
 	comprobar = ARGUMENTO_COMPROBAR in argumentos or comprobar_web
+	comprobar = comprobar or comprobar_actualizacion
 	resultado_web = [False]
 	archivos = [a for a in argumentos if not a.startswith("--")]
 
@@ -207,6 +209,11 @@ def _principal(argumentos: list[str]) -> int:
 		ventana.live.on_snapshot = comprobar_resultado
 		_VIVOS["comprobar_web"] = wx.CallLater(35000, ventana.Close, True)
 		wx.CallAfter(ventana._navigate, "https://vix.com/es-es/search?q=teresa")
+	elif comprobar_actualizacion:
+		# Instalación de ensayo: mismo marcador real, sin mostrar ventanas ni consultar la red.
+		from app.ui.dialogo_actualizacion import al_arrancar
+		al_arrancar(ventana, ventana.actualizaciones.config)
+		_VIVOS["comprobar_actualizacion"] = wx.CallLater(9000, ventana.Close, True)
 	elif comprobar:
 		# Sin mostrar nada: se cierra en cuanto arranca el bucle de eventos.
 		wx.CallAfter(ventana.Close, True)
@@ -214,6 +221,7 @@ def _principal(argumentos: list[str]) -> int:
 		instancia.registrar_ventana(ventana.GetHandle())
 		if not (configuracion.obtener("general.iniciar_en_bandeja", False) and ventana.ocultar_en_bandeja()):
 			ventana.mostrar()
+		ventana.actualizaciones.iniciar()
 
 	log.info("Arranque completado en %.2f s.", time.perf_counter() - inicio)
 	aplicacion.MainLoop()

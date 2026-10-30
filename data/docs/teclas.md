@@ -20,6 +20,7 @@
 - Aplicaciones / Mayús+F10: menú del título.
 - Ctrl+C / Ctrl+A: copiar y seleccionar texto.
 - Ctrl+coma: opciones de sonidos, voz, columnas y bandeja.
+- Ayuda, Buscar actualizaciones: consultar una versión nueva. En el aviso, Alt+S descarga e instala; Alt+N o Escape permite seguir usando el cliente sin descargar. Durante la descarga, Escape cancela la instalación.
 - F1: manual. Ctrl+F1: teclas. Ctrl+H: ayuda del control.
 - Alt+F4: cerrar u ocultar según las opciones de bandeja.
 

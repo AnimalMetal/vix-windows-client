@@ -33,13 +33,13 @@ DATA_PROHIBIDO = {"config", "logs", "db", "cache", "temp", "sessions", "sessions
 # Archivos que nunca se copian aunque estén en una carpeta distribuible.
 PATRONES_EXCLUIDOS = ("__pycache__", "*.pyc", "*.log", "*.tmp", "*.bak", "*.db", "*.key", ".gitkeep", "desktop.ini", "Thumbs.db")
 
-PAQUETES = ["wx", "app"]
+PAQUETES = ["wx", "app", "cryptography"]
 PAQUETES_OPCIONALES = ["accessible_output2"]
 EXCLUDES = ["tkinter", "unittest", "pydoc_data", "pip", "pytest", "_pytest", "ruff", "cx_Freeze"]
 
 # ─────────────────────────────────────────────────────────────────────────────
 
-DESTINO = RAIZ / "build" / "VixClient-1.3.0"
+DESTINO = RAIZ / "build" / "VixClient-1.4.0"
 
 
 def leer_version() -> str:

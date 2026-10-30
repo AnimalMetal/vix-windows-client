@@ -24,3 +24,10 @@ data/sessions/
 data/sessions-upgrade/
 data/backups/
 data/downloads/
+
+# Release signing keys stay on the publisher's computer.
+tools/claves/
+*.key
+*.pem
+.env
+.env.*

@@ -26,6 +26,7 @@ def _(texto: str) -> str:
 
 # (clave de configuración, etiqueta, ayuda de Ctrl+H)
 OPCIONES = [
+	("updates.check_on_startup", "Buscar act&ualizaciones al iniciar", "Busca una versión nueva al abrir el cliente. Siempre pregunta Sí o No antes de descargar. Aunque desactive esta opción, puede buscar desde Ayuda, Buscar actualizaciones."),
 	("sounds.enabled", "Sonidos &suaves de la interfaz", "Activa campanitas suaves al iniciar, abrir, volver y llegar a los límites de una lista. No cambia el volumen del vídeo."),
 	("vix.row_number", "Leer &número de fila", "Incluye la fila al pedir la lectura de una columna con Ctrl+1 a Ctrl+5."),
 	("vix.column_name", "Leer ca&becera de columna", "Incluye el nombre de la columna al pedir su lectura."),

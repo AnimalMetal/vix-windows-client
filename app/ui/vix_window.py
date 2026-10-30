@@ -59,6 +59,8 @@ class VentanaPrincipal(BaseWindow):
 		super().__init__(configuracion, instancia)
 		self.Bind(wx.EVT_CHAR_HOOK, self._global_key)
 		self.SetStatusText("Elija una sección o busque en todo ViX. F6 vuelve al catálogo; F8 abre el reproductor nativo.")
+		from app.ui.dialogo_actualizacion import ControlActualizaciones
+		self.actualizaciones = ControlActualizaciones(self, configuracion)
 
 	def _crear_menus(self):
 		super()._crear_menus()
