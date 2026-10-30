@@ -21,10 +21,47 @@ def snapshot(selected="Temporada 3", episode="2", **changes):
 
 def test_selection_waits_for_new_episodes_and_finishes_when_ready():
 	assert selection_outcome(pending(), snapshot(episode="1"), 101)[0] == "waiting"
-	assert selection_outcome(pending(), snapshot(episodeLoading=True), 102)[0] == "waiting"
+	assert selection_outcome(pending(), snapshot(episodeLoading=True), 102)[0] == "ready"
+	assert selection_outcome(pending(), snapshot(episode="1", episodeLoading=True), 102)[0] == "waiting"
 	assert selection_outcome(pending(), snapshot(episodeUrls=[]), 102)[0] == "waiting"
 	assert selection_outcome(pending(), snapshot(episodeUrls=[], episodeEmpty=True), 102)[0] == "ready"
 	assert selection_outcome(pending(), snapshot(), 103)[0] == "ready"
+
+
+def test_loading_more_old_episodes_cannot_confirm_new_season():
+	data = snapshot(episodeUrls=["https://vix.com/video/video-1", "https://vix.com/video/video-2"])
+	assert selection_outcome(pending(), data, 102)[0] == "waiting"
+
+
+def test_rapid_requests_compare_with_episodes_at_the_actual_click():
+	# Season 2 arrived while season 3 was being requested: it must not be
+	# mistaken for season 3 merely because it differs from the old native rows.
+	result = {"request": 2, "status": "clicked", "beforeUrls": ["https://vix.com/video/video-2"]}
+	assert selection_outcome(pending(), snapshot(episode="2", selectionResult=result), 102)[0] == "waiting"
+	assert selection_outcome(pending(), snapshot(episode="3", selectionResult=result), 102)[0] == "ready"
+	assert selection_outcome(pending(), snapshot(episode="3", selectionResult={**result, "request": 1}), 102)[0] == "waiting"
+
+
+def test_loaded_episodes_do_not_wait_for_load_more_spinner(frame):
+	frame._selector_pending = pending(started=time.monotonic())
+	frame.live.begin_episode_selection()
+	frame._live_snapshot(snapshot(episodeLoading=True))
+	assert frame._selector_pending is None
+	assert frame.lista.GetItemText(0) == "Episodio 2"
+	assert frame.live.timer.GetInterval() == 1200
+
+
+def test_return_to_original_season_supersedes_pending_request(frame):
+	frame.live.view = SimpleNamespace(RunScriptAsync=lambda script: None, Stop=lambda: None)
+	frame.season_choice.SetStringSelection("Temporada 3")
+	frame._select_episode_content("season")
+	assert frame.live.timer.GetInterval() == 200
+	frame.season_choice.SetStringSelection("Temporada 1")
+	frame._select_episode_content("season")
+	assert frame._selector_pending["request"] == 2
+	frame._live_snapshot(snapshot(selected="Temporada 1", episode="1", selectionResult={"request": 2, "status": "clicked"}))
+	assert frame._selector_pending is None
+	assert frame.lista.GetItemText(0) == "Episodio 1"
 
 
 def test_failure_and_timeout_do_not_leave_loading_stuck():

@@ -1,5 +1,11 @@
 ﻿# Novedades
 
+## 1.4.1
+
+Al cambiar de temporada o grupo de episodios, la lista muestra los primeros episodios en cuanto están disponibles. Ya no espera al indicador de cargar más de ViX, que podía retrasarla unos quince segundos. Los demás episodios siguen cargándose después.
+
+Se comprueba que las filas nuevas correspondan al último cambio solicitado. Volver rápidamente a la temporada original cancela la selección intermedia sin dejar la lista esperando. Se conservan foco y opciones de temporada.
+
 ## 1.4.0
 
 El cliente busca actualizaciones al iniciar y pregunta «Sí, descargar e instalar» o «No, seguir usando el cliente». No descarga sin su consentimiento. Puede desactivar «Buscar actualizaciones al iniciar» en Opciones y consultar siempre desde Ayuda, Buscar actualizaciones.

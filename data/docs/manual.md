@@ -18,6 +18,8 @@ Elija una categoría en Sección. Ctrl+F lleva a Buscar en todo ViX: escriba y p
 
 Intro abre un título y sus episodios. F4 muestra su información completa. Las opciones se consultan automáticamente: Temporada permite cambiar de temporada y Grupo de episodios permite elegir un rango cuando ViX divide la lista. Las otras temporadas y grupos siguen disponibles después de elegir. Actualizar temporadas y grupos vuelve a consultar las opciones si hace falta. Al cambiar se espera la carga de los episodios correspondientes, se reemplazan los anteriores y se limpia el filtro local. Una selección fallida muestra un error y no bloquea las actualizaciones. Las filas nuevas conservan foco. Tab recorre los controles y desplaza la vista si hace falta.
 
+Los primeros episodios se muestran en cuanto están disponibles, aunque ViX siga cargando más. No hace falta esperar al final de toda la temporada para empezar a recorrerlos. Si cambia varias veces seguidas, el cliente conserva la última selección solicitada.
+
 ## En vivo
 
 Elija En vivo en Sección. La lista muestra Número, Canal, Ahora, Horario local, A continuación, Categorías y Favorito. Ctrl+1 a Ctrl+7 consulta esas columnas. Grupo de canales permite elegir las categorías ofrecidas por ViX. El filtro local busca nombres, números y programas de los canales cargados. F4 abre la programación disponible con horarios locales; Intro reproduce el canal seleccionado.

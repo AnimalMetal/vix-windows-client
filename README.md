@@ -1,6 +1,10 @@
-# ViX Client 1.4.0
+# ViX Client 1.4.1
 
 Accessible Windows client with a native catalogue, global search and native playback controls. The main window contains only Catalogue and Player. Its required web engine stays hidden, except when the user explicitly opens the necessary Mi cuenta workflow.
+
+## Fixes in 1.4.1
+
+Season and episode-group changes show the first new episodes without waiting for ViX's persistent load-more spinner. The client checks more frequently only while a selection is pending. Rapid choices compare episode rows at the actual site click, and returning to the original season supersedes the earlier request. Initial Vecinos checks went from about 15.6 seconds to 0.25 seconds; network and site response times still vary.
 
 ## Updates in 1.4.0
 
@@ -33,7 +37,7 @@ The engine is still required internally for catalogue rendering, authentication 
 ## Run and validate
 
 Python 3.13 plus requirements.txt: `python main.py`.
-Build: `python setup_cx.py build`; output: `build/VixClient-1.4.0/VixClient.exe`. Keep the whole output folder. Microsoft Edge WebView2 Runtime is required.
+Build: `python setup_cx.py build`; output: `build/VixClient-1.4.1/VixClient.exe`. Keep the whole output folder. Microsoft Edge WebView2 Runtime is required.
 
 Tests: `python -m pytest`. Public live-season checks: `python tools/check_season_navigation.py` (La Rosa de Guadalupe, Mujeres Asesinas, Vecinos and Mi Corazón Es Tuyo episode ranges). A specific search result can be checked with `python tools/check_season_navigation.py search:Vecinos`. Playback/return check: `python tools/check_native_updates.py`. Startup: `python main.py --comprobar-arranque`; a live search check is available through --comprobar-webview with isolated APP_DATA_DIR.
 

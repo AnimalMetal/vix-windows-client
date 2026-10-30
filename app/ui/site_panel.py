@@ -66,6 +66,7 @@ class SitePanel(wx.Panel):
 
 	def navigate(self, url):
 		self.ensure_view()
+		self.end_episode_selection()
 		if self._message_handler:
 			self.view.RemoveScriptMessageHandler("vixclient")
 		self.view.RemoveAllUserScripts()
@@ -178,6 +179,14 @@ class SitePanel(wx.Panel):
 		self._known.clear()
 		self._quiet = 0
 		self.loading_all = True
+
+	def begin_episode_selection(self):
+		"""Consultar pronto la primera página, sin acelerar la carga del resto del catálogo."""
+		self.timer.Start(200)
+
+	def end_episode_selection(self):
+		if self.timer.IsRunning():
+			self.timer.Start(1200)
 
 	def control(self, action):
 		if self.view and urlsplit(self.view.GetCurrentURL()).hostname == "vix.com":

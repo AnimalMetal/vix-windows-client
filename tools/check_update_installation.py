@@ -17,7 +17,9 @@ def main():
 	area = (ROOT / "data/temp" / ("update-install-" + str(time.time_ns()))).resolve()
 	assert area.is_relative_to((ROOT / "data/temp").resolve())
 	installation = area / "ViX Client"
-	previous = ROOT / "build/VixClient-1.3.0"
+	candidates = [p for p in (ROOT / "build").glob("VixClient-*") if p.is_dir() and actualizador.comparar_versiones(p.name.removeprefix("VixClient-"), APP_VERSION) < 0]
+	previous = max(candidates, key=lambda p: actualizador.clave_version(p.name.removeprefix("VixClient-")))
+	previous_version = previous.name.removeprefix("VixClient-")
 	def ignore_personal_data(folder, names):
 		return [n for n in names if n not in actualizador.DATA_ACTUALIZABLE] if Path(folder) == previous / "data" else []
 	shutil.copytree(previous, installation, ignore=ignore_personal_data)
@@ -32,7 +34,7 @@ def main():
 	session = installation / "data/sessions/test-session.bin"
 	session.parent.mkdir(parents=True, exist_ok=True)
 	session.write_bytes(b"preserved session bytes")
-	config = actualizador.Configuracion("1.3.0", installation, comando=[str(installation / "VixClient.exe"), "--comprobar-actualizacion"], permitir_desde_codigo=True, pid_a_esperar=2147483647)
+	config = actualizador.Configuracion(previous_version, installation, comando=[str(installation / "VixClient.exe"), "--comprobar-actualizacion"], permitir_desde_codigo=True, pid_a_esperar=2147483647)
 	manifest = json.loads((ROOT / "dist" / APP_VERSION / "version.json").read_text(encoding="utf-8"))
 	actualizador.verificar_firma(manifest, config.claves_publicas)
 	info = actualizador._info_desde_manifiesto(config, manifest, config.url_manifiesto)

@@ -39,7 +39,7 @@ EXCLUDES = ["tkinter", "unittest", "pydoc_data", "pip", "pytest", "_pytest", "ru
 
 # ─────────────────────────────────────────────────────────────────────────────
 
-DESTINO = RAIZ / "build" / "VixClient-1.4.0"
+DESTINO = RAIZ / "build" / "VixClient-1.4.1"
 
 
 def leer_version() -> str:

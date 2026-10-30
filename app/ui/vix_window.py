@@ -274,6 +274,7 @@ class VentanaPrincipal(BaseWindow):
 			self._live_mode = False
 			self.live.loading_all = False
 			self._selector_pending = None
+			self.live.end_episode_selection()
 			self._sync_episode_controls([])
 			self._page_groups = []
 			self.home_group.SetSelection(0)
@@ -473,6 +474,7 @@ class VentanaPrincipal(BaseWindow):
 			if outcome == "waiting":
 				return
 			self._selector_pending = None
+			self.live.end_episode_selection()
 			if outcome == "ready":
 				self._browser_titles = {}
 				self._page_groups = []
@@ -642,12 +644,13 @@ class VentanaPrincipal(BaseWindow):
 		control = self.season_choice if kind == "season" else self.episode_group
 		target = control.GetStringSelection()
 		selector = self._selectors.get(kind)
-		if not selector or not target or not self.live.view or target == selector.get("selected"):
+		if not selector or not target or not self.live.view or (target == selector.get("selected") and not self._selector_pending):
 			return
 		self.live.loading_all = False
 		self._selector_request += 1
-		self._selector_pending = {"request": self._selector_request, "selector": selector["id"], "target": target, "before": list(self._episode_urls), "started": time.monotonic()}
+		self._selector_pending = {"request": self._selector_request, "selector": selector["id"], "target": target, "before": list(self._episode_urls), "started": time.monotonic(), "allow_same": target == selector.get("selected")}
 		self.live.view.RunScriptAsync(selection_script(selector["id"], target, self._selector_request))
+		self.live.begin_episode_selection()
 		self.SetStatusText("Cargando " + target + "…")
 
 	def _play_selected(self, event):
